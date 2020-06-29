@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+const items = require('./routes/api/items');
+
 const app = express();
 
 // Bodyparser Middleware
@@ -14,6 +16,10 @@ const db = require('./config/keys').mongoURI;
 mongoose.connect(db)
 .then(() => console.log('A MongoDB csatlakoztatva van.'))
 .catch(err => console.log(err));
+
+// Use Routes
+const mainRoutes = require('./Routes/api/items')
+app.use(mainRoutes);
 
 const port = process.env.PORT || 5000;
 
